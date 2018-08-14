@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="users">
+
+
+
+	<select id="getList" resultType="UsersDto">
+		SELECT num,id,pwd,email
+		FROM uesrs
+		ORDER BY num DESC
+	</select>	
+	
+	<insert id="insert" parameterType="UsersDto">
+		INSERT INTO uesrs
+		(num,id,pwd,eamil,regdate)
+		VALUES(member_seq.NEXTVAL, #{id},#{pwd},#{email},#{regdate})
+	</insert>
+	
+	<update id="update" parameterType="UsersDto">
+		UPDATE uesrs
+		SET id=#{id}, pwd=#{pwd}, email=#{email}
+		WHERE num=#{num}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM uesrs
+		WHERE num=#{num}
+	</delete>
+	
+	<select id="getDate" parameterType="int" resultType="UsersDto">
+		SELECT num,id,pwd,email,regdate
+		FROM users
+		WHERE num=#{num}
+	</select>
+
+</mapper>
